@@ -97,10 +97,32 @@ class SecondScreen extends StatelessWidget {
       body: Center(
         child: RaisedButton(
           onPressed: () {
-            Navigator.pop(context);
-          },
-          child: Text('Go back to MainScreen!'),
-        ),
+            Navigator.of(context).push(
+              // We will now use PageRouteBuilder
+              PageRouteBuilder(
+                opaque: false,
+                pageBuilder: (BuildContext context, __, ___) {
+                  return new Scaffold(
+                    backgroundColor: Colors.black45,
+                    body: new Container(
+                      margin: EdgeInsetsDirectional.only(
+                                  top: 60.0, end: 2.0),
+                      color: Colors.white,
+                      height: MediaQuery.of(context).size.height,
+                      width: MediaQuery.of(context).size.width,
+                      child: new RaisedButton(
+                        child: Text('Close'),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        }
+                      ), // RaisedButton
+                    ), // Container
+                  ); // Scaffold
+                }
+              )
+            ); // PageRouteBuilder
+          }
+        )
       ),
     );
   }
